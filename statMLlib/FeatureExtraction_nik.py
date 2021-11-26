@@ -214,18 +214,19 @@ def extractFeatures(root_dir, split_by):
 #                             max_t=(len(signal)/sampleRate)
 #                             print(f" {len(signal)}   {sampleRate}")
                             
-                        # print(len(signal)/sampleRate)
+                        
                         
                         #pad zeros
                         max_len=116247
                         signal = np.pad(signal, (0, max_len-len(signal)), 'constant')
+                        # print(len(signal)/sampleRate)
                         #normalize signal
                         signal = (signal-np.mean(signal))/np.std(signal)
                         
                         # FEATURE EXTRACTION
 
-                        win_len=int(len(signal)/40)#2400
-                        hop_len=int(win_len/2)
+                        win_len=int(len(signal))#2400
+                        hop_len=int(win_len+1)
                         # mfcc
                         mfccCoeffs = librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=40,fmax=8000)
 
@@ -266,14 +267,14 @@ def extractFeatures(root_dir, split_by):
                             
                             if not os.path.exists(actor_dir):
                                 os.makedirs(actor_dir)
-                            with open(actor_dir+'/'+fileName[0:-13] + '_features.pkl', 'wb') as f:
+                            with open(actor_dir+'/'+fileName[0:-4] + '_features.pkl', 'wb') as f:
                                 pickle.dump((featureDict), f)
                         elif split_by=='statement':
                             # SAVE DATA
                             statement_dir=f'split_by_statement/actor_{Statement}'
                             if not os.path.exists(statement_dir):
                                 os.makedirs(statement_dir)
-                            with open(statement_dir+'/'+fileName[0:-13] + '_features.pkl', 'wb') as f:
+                            with open(statement_dir+'/'+fileName[0:-4] + '_features.pkl', 'wb') as f:
                                 pickle.dump((featureDict), f)
 
                         os.chdir("../")
