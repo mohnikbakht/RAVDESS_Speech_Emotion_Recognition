@@ -87,15 +87,16 @@ def zeroPadFiles(root_dir):
 
                         nFiles = os.walk(os.getcwd())
 
-                        signalWav = wave.open(fileName, 'r')
+                        # signalWav = wave.open(fileName, 'r')
 
 
                         # Extract Raw Audio from Wav File
-                        signal = signalWav.readframes(-1)
-                        signal = np.frombuffer(signal, "int16")
+                        
+                        signal, sampleRate = librosa.load(fileName)
+                        # signal = signalWav.readframes(-1)
+                        # signal = np.frombuffer(signal, "int16")
 
                         lenVec.append(len(signal))
-
 
                         os.chdir("../")
 
@@ -156,14 +157,14 @@ def extractFeatures(root_dir, split_by):
       "angry"  : 192
     }
 
-    sampleRate = int(48e3);
+    # sampleRate = int(48e3);
 
     nFilesPerActor = 60
 
     actorMaleArray = [f"{v:02}" for v in list(range(1, 25, 2))]     # use if want to loop over male speeches
     actorFemaleArray = [f"{v:02}" for v in list(range(2, 25, 2))]   # use if want to loop over female speeches
     actorAll = [f"{v:02}" for v in list(range(1, 25, 1))]           # use if want to loop over all actors speeches
-    actorTrain = [f"{v:02}" for v in list(range(1, 21, 1))]
+    actorTrain = [f"{v:02}" for v in list(range(1, 25, 1))]
     actorTest = [f"{v:02}" for v in list(range(21, 25, 1))]
     emotionAll =  [f"{v:02}" for v in list(range(1, 9, 1))] 
     statementAll =  [f"{v:02}" for v in list(range(1, 3, 1))] 
@@ -178,8 +179,10 @@ def extractFeatures(root_dir, split_by):
     debugPoint = 0
     stopVAr = 0
     lenVec = []
-
+    
+    # max_t=0
     for Actor in actorTrain:
+        print(f"Actor {Actor}")
         for Emotion in emotionAll:
             for EmotionalInt in emotionalInt:
                 for Statement in statementAll:
@@ -190,29 +193,44 @@ def extractFeatures(root_dir, split_by):
 
 
 
+                        # fileName = Modality +'-'+ VocalChannel +'-'+ Emotion +'-'+ EmotionalInt +'-'+ Statement +'-'+ Repetition +'-'+ Actor + '.wav'
+
+#                         os.chdir(r"Actor_" + fileName[-6:-4] + '_extended')
+
+#                         fileName = Modality +'-'+ VocalChannel +'-'+ Emotion +'-'+ EmotionalInt +'-'+ Statement +'-'+ Repetition +'-'+ Actor + '_extended' + '.wav'
+                        
+    
+                        os.chdir(r"Actor_" + Actor )
+
                         fileName = Modality +'-'+ VocalChannel +'-'+ Emotion +'-'+ EmotionalInt +'-'+ Statement +'-'+ Repetition +'-'+ Actor + '.wav'
-
-                        os.chdir(r"Actor_" + fileName[-6:-4] + '_extended')
-
-                        fileName = Modality +'-'+ VocalChannel +'-'+ Emotion +'-'+ EmotionalInt +'-'+ Statement +'-'+ Repetition +'-'+ Actor + '_extended' + '.wav'
 
                         nFiles = os.walk(os.getcwd())
 
-                        signalWav = wave.open(fileName, 'r')
+                        # signalWav = wave.open(fileName, 'r')
 
                         # Extract Raw Audio from Wav File
-                        signal = signalWav.readframes(-1)
-                        signal = np.frombuffer(signal, "int16")
-
+                        signal, sampleRate = librosa.load(fileName)
+#                         if (max_t<(len(signal)/sampleRate)):
+#                             max_t=(len(signal)/sampleRate)
+#                             print(f" {len(signal)}   {sampleRate}")
+                            
+                        # print(len(signal)/sampleRate)
+                        
+                        #pad zeros
+                        max_len=116247
+                        signal = np.pad(signal, (0, max_len-len(signal)), 'constant')
+                        #normalize signal
+                        signal = (signal-np.mean(signal))/np.std(signal)
+                        
                         # FEATURE EXTRACTION
 
-                        win_len=2400
-                        hop_len=int(0.5*win_len)
+                        win_len=int(len(signal)/40)#2400
+                        hop_len=int(win_len/2)
                         # mfcc
-                        mfccCoeffs = librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=13)
+                        mfccCoeffs = librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=40,fmax=8000)
 
                         # chroma
-                        chromaCoeffs = librosa.feature.chroma_stft(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_chroma=12)
+                        chromaCoeffs = librosa.feature.chroma_stft(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_chroma=20)
 
                         # mel spectrogram
                         melspectCoeffs = librosa.feature.melspectrogram(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mels=64,fmax=8000)
@@ -261,7 +279,7 @@ def extractFeatures(root_dir, split_by):
                         os.chdir("../")
 
 
-
+    # print(max_t)
     stopVAr = 1
 # fig, ax = plt.subplots()
 
