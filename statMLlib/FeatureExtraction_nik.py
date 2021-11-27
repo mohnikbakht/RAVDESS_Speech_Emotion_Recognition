@@ -124,7 +124,7 @@ def zeroPadFiles(root_dir):
     stopVar = 0
 
     
-def extractFeatures(root_dir, split_by):    
+def extractFeatures(root_dir, split_by, Feature_2D=False):    
 
     Modality = '03'         #   (01 = full-AV, 02 = video-only, 03 = audio-only).
     VocalChannel = '01'     #   (01 = speech, 02 = song).
@@ -224,24 +224,59 @@ def extractFeatures(root_dir, split_by):
                         signal = (signal-np.mean(signal))/np.std(signal)
                         
                         # FEATURE EXTRACTION
+                        
+                        
+                        if Feature_2D:
+                        #2D feature
+                            win_len=int(len(signal)/80)#2400
+                            hop_len=int(win_len/2)
 
-                        win_len=int(len(signal))#2400
-                        hop_len=int(win_len+1)
-                        # mfcc
-                        mfccCoeffs = librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=40,fmax=8000)
+                             # mfcc
+                            mfccCoeffs = librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=40)
 
-                        # chroma
-                        chromaCoeffs = librosa.feature.chroma_stft(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_chroma=20)
+                            # chroma
+                            chromaCoeffs = librosa.feature.chroma_stft(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len)
 
-                        # mel spectrogram
-                        melspectCoeffs = librosa.feature.melspectrogram(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mels=64,fmax=8000)
+                            # mel spectrogram
+                            melspectCoeffs = librosa.feature.melspectrogram(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mels=128)
 
-                        # contrast
-                        contrastCoeffs = librosa.feature.spectral_contrast(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_bands=6)
+                            # contrast
+                            contrastCoeffs = librosa.feature.spectral_contrast(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_bands=6)
 
-                        # tonnetz
-                        harmon = librosa.effects.harmonic(signal.astype(float))
-                        tonnetz = librosa.feature.tonnetz(y=harmon, sr=sampleRate)
+                            # tonnetz
+                            harmon = librosa.effects.harmonic(signal.astype(float))
+                            tonnetz = librosa.feature.tonnetz(y=harmon, sr=sampleRate)
+
+                        else: 
+                            #1D feature
+                            win_len=int(len(signal)/40)#2400
+                            hop_len=int(win_len/2)
+
+                            ## MFCCs
+                            mfccCoeffs=np.mean(librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_mfcc=40), axis=1)
+
+                            ## Chroma
+                            stft=np.abs(librosa.stft(signal.astype(float)))
+                            chromaCoeffs=np.mean(librosa.feature.chroma_stft(S=stft, sr=sampleRate),axis=1)
+
+                            ## Mel Scale
+                            melspectCoeffs=np.mean(librosa.feature.melspectrogram(signal.astype(float), sr=sampleRate),axis=1)
+                            
+#                             # mfcc
+#                             mfccCoeffs = np.mean(librosa.feature.mfcc(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mfcc=40,fmax=8000),axis=1)
+
+#                             # chroma
+#                             chromaCoeffs = np.mean(librosa.feature.chroma_stft(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_chroma=20),axis=1)
+
+#                             # mel spectrogram
+#                             melspectCoeffs = np.mean(librosa.feature.melspectrogram(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_mels=64,fmax=8000), axis=1)
+
+                            # contrast
+                            contrastCoeffs = np.mean(librosa.feature.spectral_contrast(y=signal.astype(float), sr=sampleRate, n_fft=win_len, hop_length=hop_len, n_bands=6), axis=1)
+
+                            # tonnetz
+                            harmon = librosa.effects.harmonic(signal.astype(float))
+                            tonnetz = librosa.feature.tonnetz(y=harmon, sr=sampleRate)
 
                         featureDict =	{
                           "ID" :   fileName[0:-13],
@@ -254,8 +289,13 @@ def extractFeatures(root_dir, split_by):
                           "tonnetz"  : tonnetz
                         }
 
-                        os.chdir("../")
-                        newpath = r"FeaturesAll"
+                        os.chdir(root_dir)
+                        if Feature_2D:
+                            newpath = r"FeaturesAll/2d-cnn"
+                        else:
+                            newpath = r"FeaturesAll/1d-cnn"
+
+                                
                         if not os.path.exists(newpath):
                                 os.makedirs(newpath)
 
@@ -277,7 +317,7 @@ def extractFeatures(root_dir, split_by):
                             with open(statement_dir+'/'+fileName[0:-4] + '_features.pkl', 'wb') as f:
                                 pickle.dump((featureDict), f)
 
-                        os.chdir("../")
+                        os.chdir(root_dir)
 
 
     # print(max_t)

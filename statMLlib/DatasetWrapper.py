@@ -10,11 +10,11 @@ import numpy as np
 
 class RAVDESSFeatureDataset(Dataset):
     
-    def __init__(self, split='train', split_by='actor', root_dir='', mean= torch.tensor(0), std= torch.tensor(1)):
+    def __init__(self, split='train', split_by='actor', root_dir='', mean= torch.tensor(0), std= torch.tensor(1), feature_2d=False):
         
         self.mean_vec=mean
         self.std_vec=std
-        
+        self.feature_2d=feature_2d
 
         if split=='train':
             if split_by=='actor':
@@ -107,7 +107,15 @@ class RAVDESSFeatureDataset(Dataset):
         mel=np.log(loaded.get("melspectCoeffs")+1e-14)
         contrast=np.log(loaded.get("contrastCoeffs")+1e-14)
         # tonnetz=loaded.get("tonnetz")
-        src=np.r_[mfcc, chrom, contrast, mel]
+        
+        if self.feature_2d:
+            #2d
+            src=np.r_[mfcc, chrom, contrast, mel]
+        else:
+            #1d
+            src=np.r_[mfcc, chrom, mel]
+            src=np.reshape(src, (-1,1))
+
         # src=mel
        
         # print(self.mean_vec)
@@ -116,7 +124,7 @@ class RAVDESSFeatureDataset(Dataset):
         tgt=loaded.get("emotion_number")
 
 
-        src_tensor = torch.from_numpy(src).float()
+        src_tensor = torch.from_numpy(src.T).float()
         # print(src_tensor.shape)
         # print(self.mean_vec.shape)
         src_tensor=(src_tensor-self.mean_vec)/self.std_vec
