@@ -40,6 +40,15 @@ class RAVDESSFeatureDataset(Dataset):
                         self.data.append(wave_path)
                 random.shuffle(self.data)
                 # print(self.data[0])
+            elif split_by=='arb':
+                self.path=root_dir+'arbitrary/training/'
+
+                file_list = glob.glob(self.path + "/*.pkl")
+
+                self.data = []
+                for class_path in file_list:
+                    self.data.append(class_path)
+                random.shuffle(self.data)
 
         elif split=='valid':
             if split_by=='actor':
@@ -63,6 +72,16 @@ class RAVDESSFeatureDataset(Dataset):
                     # class_name = class_path.split("/")[-1]
                     for wave_path in glob.glob(class_path+"/*.pkl"):
                         self.data.append(wave_path)
+                random.shuffle(self.data)
+            elif split_by=='arb':
+                self.path=root_dir+'arbitrary/valid/'
+
+                
+                file_list = glob.glob(self.path + "/*.pkl")
+
+                self.data = []
+                for class_path in file_list:
+                    self.data.append(class_path)
                 random.shuffle(self.data)
             
         elif split=='test':
@@ -88,6 +107,16 @@ class RAVDESSFeatureDataset(Dataset):
                     for wave_path in glob.glob(class_path+"/*.pkl"):
                         self.data.append(wave_path)
                 random.shuffle(self.data)
+            elif split_by=='arb':
+                self.path=root_dir+'arbitrary/test/'
+
+               
+                file_list = glob.glob(self.path + "/*.pkl")
+
+                self.data = []
+                for class_path in file_list:
+                    self.data.append(class_path)
+                random.shuffle(self.data)
             
         else:
             print(f"no data with split={split}")
@@ -103,17 +132,20 @@ class RAVDESSFeatureDataset(Dataset):
 
         
         mfcc=loaded.get("mfccCoeffs")
-        chrom=np.log(loaded.get("chromaCoeffs")+1e-14)
-        mel=np.log(loaded.get("melspectCoeffs")+1e-14)
-        contrast=np.log(loaded.get("contrastCoeffs")+1e-14)
-        # tonnetz=loaded.get("tonnetz")
+        chrom=np.log(loaded.get("chromaCoeffs")+1)
+        mel=np.log(loaded.get("melspectCoeffs")+1)
+        # mel=(mel-np.mean(mel))/np.std(mel)
+        contrast=np.log(loaded.get("contrastCoeffs")+1)
+        # tonnetz=np.log(loaded.get("tonnetz")+1)
         
         if self.feature_2d:
             #2d
-            src=np.r_[mfcc, chrom, contrast, mel]
+            src=np.r_[mfcc, chrom, mel]
+            # src= mel
+
         else:
             #1d
-            src=np.r_[mfcc, chrom, mel]
+            src=np.r_[mfcc, mel]
             src=np.reshape(src, (-1,1))
 
         # src=mel
