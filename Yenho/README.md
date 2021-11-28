@@ -9,3 +9,5 @@
 - load_models.ipynb: notebook to load saved CNN and NN models
 - utils.py: helper functions for CNN and NN models
 - models.py: contains model architecture
+- Archive: directories/files unused
+  - models.ipynb
