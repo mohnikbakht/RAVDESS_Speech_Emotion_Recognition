@@ -1,6 +1,7 @@
 # StatML-Project-2021
 
-
+The final paper contains all the details
+Plus the presentation slides
 
 - LogisticRegression.ipynb: notebook to generate new LR models
 - CNN.ipynb: notebook to generate new CNN models
