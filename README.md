@@ -40,6 +40,19 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig1.svg" width="900"/>
 
+## Training Parameters
+
+Statistical Learning
+    -Hyperparameter Search: Grid search to determine regularization strength.
+    
+Deep Learning
+    -Cross-entropy loss
+    -Adam optimizer with learning rate of 1e-4
+    -ReLU activation function
+    -He initialization
+    -Mini-batch size of 8.
+
+
 ## Steps taken for each model
 
 1. Hyperparameter tuning using the train and validation set
@@ -53,68 +66,3 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 ## Results
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.PNG" width="900"/>
-
-| ML Model     | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score |
-| ---          | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      |
-| LR           | 0.710    | 0.707     | 0.705  | 0.707    | 0.571    | 0.583     | 0.557  | 0.571    | 0.422    | 0.476     | 0.419  | 0.422    |
-
-
-LR & 0.710 & 0.707 & 0.705 & 0.707 & 0.571 & 0.583 & 0.557 & 0.571 & 0.422 & 0.476 & 0.419 & 0.422\\
- SVM$_\text{lin}$ & 0.798 & 0.800 & 0.795 & 0.798 & 0.595 & 0.612 & 0.589 & 0.595 & 0.378 & 0.431 & 0.365 & 0.378\\
- SVM$_\text{rbf}$ & 0.979 & 0.979 & 0.979 & 0.979 & 0.611 & 0.611 & 0.605 & 0.611 & 0.400 & 0.428 & 0.385 & 0.400 \\ 
- 
- MLP  & 0.997 & 0.997 & 0.997 & 0.997 & 0.738 & 0.748 & 0.736 & 0.738 & 0.417 & 0.425 & 0.384 & 0.384 \\ 
- 
- 1D-CNN  & 1 & 1 & 1 & 1 & 0.746 & 0.769 & 0.748 & 0.748 & 0.356 & 0.364  & 0.320 & 0.320 \\ 
- 
- 2D-CNN & 0.951 & 0.952 & 0.951 & 0.951 & 0.714 & 0.762 & 0.712 & 0.714 & \textbf{0.489} & \textbf{0.479} & \textbf{0.463} & \textbf{0.489}\\ 
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/RPi.png" alt="Image of The ECG/SCG Patch" width="300"/>
-
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/Actuator.png" alt="Image of The ECG/SCG Patch" width="300"/>
-
-
-The actuator is non-linear in low frequency and needs calibration to make sure it replicates the input signal to the output in form of acceleration.
-The code is written in Python and in a way that you have two options:
-
-1) Calibration mode: Calibrate the system (in a new environment):
-```console
-python3 Synthetic_SCG.py calibrate
-```
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/calibrate_1.png" alt="Image of The ECG/SCG Patch" width="400"/>
-
-
-2) Generation mode: Generate SCG waveforms:
-
-```console
-python3 Synthetic_SCG.py generate signal1.wav
-```
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/generate_1.png" alt="Image of The ECG/SCG Patch" width="400"/>
-
-
-## Use
-
-Depending on the type of the connection to the RPi, there are 2 options:
-1) If a display is connected to the RPi (or have X11 forwarding enabled), the plots will be shown in separate windows. Use this command (this mode is default):
-```console
-python3 Synthetic_SCG.py generate signal1.wav desktop
-```
-2) If communication is through a terminal only, the plots will be plotted in the terminal (lower quality). Use this command:
-```console
-python3 Synthetic_SCG.py generate signal1.wav terminal
-```
-## Output Recording Samples
-
-A 10s generated ECG and SCG with a heart-rate of 60 bpm:
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/sample_1.png" alt="Image of The ECG/SCG Patch" width="600"/>
-
-Zoomed in:
-
-<img src="https://github.com/mohnikbakht/Synthetic_ECG_SCG_Generator_Demo/blob/main/Images/sample_2.png" alt="Image of The ECG/SCG Patch" width="600"/>
-
-
-
