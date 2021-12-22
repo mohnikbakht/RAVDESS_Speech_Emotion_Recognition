@@ -26,7 +26,7 @@ For local features, we divide audio signals into short time windows of length 50
 
 We approach feature selection by implementing the backwards selection algorithm shown below. We use the validation accuracy as the evaluation score throughout this procedure. The results of our selection algorithm for all models are shown in Table below.
 
-<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward.png" width="900"/>
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward.PNG" width="900"/>
 
 ## Models
 
@@ -37,7 +37,7 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 
 ## Results
 
-<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.png" width="900"/>
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.PNG" width="900"/>
 
 | ML Model     | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score |
 | ---          | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      |
