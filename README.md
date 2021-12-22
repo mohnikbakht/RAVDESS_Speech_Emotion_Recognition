@@ -16,7 +16,7 @@ We split our data samples into three sets: train, validation, and test. To preve
 
 ## Feature Extraction
 For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
-
+<img src="https://github.com/mohnikbakht/ RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D features.svg" alt="Image of The 2D features" width="300"/>
 ## Feature Selection
 
 We approach feature selection by implementing the backwards selection algorithm shown below. We use the validation accuracy as the evaluation score throughout this procedure. The results of our selection algorithm for all models are shown in Table below.
@@ -25,7 +25,7 @@ We approach feature selection by implementing the backwards selection algorithm 
 
 There are two classes of algorithms that we investigate: 1) traditional statistical learning methods and 2) deep learning methods. First, we develop linear discriminative models such as logistic regression and support vector machines to establish the baseline performance of the SER classification task. These methods have been shown to be reasonably effective at audio sample classification tasks. Furthermore, we can use the test results to determine if our task is linearly separable given our extracted features, or if more complex models are required. Second, we develop three neural network architectures: 1) multi-layer perceptron (MLP), 2) 1D convolutional (CNN), and 3) 2D convolutional networks (CNN). In recent works, neural networks have been shown to achieve state-of-the-art performance in audio classification tasks. We use Scikit-Learn implementations of LR and SVM, and Pytorch to build all deep learning models. 
 
-| :---:        |                                          |          ---: |
+
 
 ## Results
 
