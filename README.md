@@ -27,7 +27,6 @@ For local features, we divide audio signals into short time windows of length 50
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="900"/>
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig5.svg" width="900"/>
 
-
 ## Feature Selection
 
 We approach feature selection by implementing the backwards selection algorithm shown below. We use the validation accuracy as the evaluation score throughout this procedure. The results of our selection algorithm for all models are shown in Table below.
@@ -46,12 +45,11 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
   - Hyperparameter Search: Grid search to determine regularization strength.
     
 - Deep Learning
-  -Cross-entropy loss
-  -Adam optimizer with learning rate of 1e-4
-  -ReLU activation function
-  -He initialization
-  -Mini-batch size of 8.
-
+  - Cross-entropy loss
+  - Adam optimizer with learning rate of 1e-4
+  - ReLU activation function
+  - He initialization
+  - Mini-batch size of 8.
 
 ## Steps taken for each model
 
