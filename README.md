@@ -43,12 +43,12 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 ## Steps taken for each model
 
 1. Hyperparameter tuning using the train and validation set
-  • Regularization strength
-  • Network architecture
+  - Regularization strength
+  - Network architecture
 2. Backward selection to pick the best features
 3. Retrain on the whole train + validation set
 4. Test on held-out test set and record evaluation metrics
-  • Accuracy, Precision, Recall, F1 Score
+  - Accuracy, Precision, Recall, F1 Score
 
 ## Results
 
