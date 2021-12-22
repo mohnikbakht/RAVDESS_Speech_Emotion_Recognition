@@ -19,7 +19,7 @@ For local features, we divide audio signals into short time windows of length 50
 
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="700"/>
-<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig2.svg" width="700"/>
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig6.svg" width="700"/>
 
 
 ## Feature Selection
