@@ -15,8 +15,14 @@ We use the Ryerson Audio-Visual Database of Emotion Speech and Song (RAVDESS), a
 We split our data samples into three sets: train, validation, and test. To prevent data leakage, we set aside actors 1-21 for training and validation, but held out actors 22-24 for a test set. 
 
 ## Feature Extraction
-For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
 
+Humans can sense emotions from only sounds. If we convert the raw audio signals into a perceptually meaningful space, we can represent the data more closely to how humans perceive and improve audio classification. Some of these features are:
+• Mel-frequency cepstral coefficients (MFCCs)
+• Mel spectrogram
+• Spectral contrast
+• Chromagram
+
+For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="900"/>
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig5.svg" width="900"/>
@@ -34,6 +40,15 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig1.svg" width="900"/>
 
+## Steps taken for each model
+
+1. Hyperparameter tuning using the train and validation set
+  • Regularization strength
+  • Network architecture
+2. Backward selection to pick the best features
+3. Retrain on the whole train + validation set
+4. Test on held-out test set and record evaluation metrics
+  • Accuracy, Precision, Recall, F1 Score
 
 ## Results
 
