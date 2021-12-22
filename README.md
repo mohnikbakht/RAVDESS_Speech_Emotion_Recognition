@@ -30,6 +30,7 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 ## Results
 
 | ML Model     | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score | accuracy | precision | recall | f1 score |
+| ---          | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      | ---      | ---       | ---    | ---      |
 | LR           | 0.710    | 0.707     | 0.705  | 0.707    | 0.571    | 0.583     | 0.557  | 0.571    | 0.422    | 0.476     | 0.419  | 0.422    |
 
 
