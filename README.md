@@ -42,10 +42,10 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 
 ## Training Parameters
 
-Statistical Learning
+- Statistical Learning
     -Hyperparameter Search: Grid search to determine regularization strength.
     
-Deep Learning
+- Deep Learning
     -Cross-entropy loss
     -Adam optimizer with learning rate of 1e-4
     -ReLU activation function
