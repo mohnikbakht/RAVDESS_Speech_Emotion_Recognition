@@ -1,10 +1,3 @@
-# StatML-Project-2021
-
-Reports:
-- final paper 
-- presentation slides
-
-
 # Speech Emotion Recognition
 
 Speech and emotions are two of the most important modes of communication among human beings, which makes Speech Emotion Recognition (SER) a key component in Human-Computer Interaction (HCI) systems. The pandemic social restrictions led to a lack of interactions and psychological distress which affected the emotional and mental health of individuals impacted by the pandemic. Thus, a need for remote emotion monitoring is felt. The main goal of this project is to explore different machine learning algorithms on the SER task which can help address this need. In particular, we compare traditional statistical approaches to more modern deep learning methods based on the evaluation metrics to learn more about the structure of the data and the complexity of the SER task.
@@ -33,7 +26,9 @@ We approach feature selection by implementing the backwards selection algorithm 
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward.PNG" width="900"/>
 
-## Models
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward_alg.PNG" width="900"/>
+
+## Models & Pipeline
 
 There are two classes of algorithms that we investigate: 1) traditional statistical learning methods and 2) deep learning methods. First, we develop linear discriminative models such as logistic regression and support vector machines to establish the baseline performance of the SER classification task. These methods have been shown to be reasonably effective at audio sample classification tasks. Furthermore, we can use the test results to determine if our task is linearly separable given our extracted features, or if more complex models are required. Second, we develop three neural network architectures: 1) multi-layer perceptron (MLP), 2) 1D convolutional (CNN), and 3) 2D convolutional networks (CNN). In recent works, neural networks have been shown to achieve state-of-the-art performance in audio classification tasks. We use Scikit-Learn implementations of LR and SVM, and Pytorch to build all deep learning models. 
 
@@ -63,4 +58,10 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 
 ## Results
 
+Evaluation results for each model are listed in the table below:
+
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.PNG" width="900"/>
+
+### Reports:
+- final paper 
+- presentation slides
