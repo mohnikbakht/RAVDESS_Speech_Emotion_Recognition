@@ -10,10 +10,10 @@ We split our data samples into three sets: train, validation, and test. To preve
 ## Feature Extraction
 
 Humans can sense emotions from only sounds. If we convert the raw audio signals into a perceptually meaningful space, we can represent the data more closely to how humans perceive and improve audio classification. Some of these features are:
-• Mel-frequency cepstral coefficients (MFCCs)
-• Mel spectrogram
-• Spectral contrast
-• Chromagram
+- Mel-frequency cepstral coefficients (MFCCs)
+- Mel spectrogram
+- Spectral contrast
+- Chromagram
 
 For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
 
