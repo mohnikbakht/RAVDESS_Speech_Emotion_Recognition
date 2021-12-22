@@ -43,7 +43,7 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 ## Training Parameters
 
 - Statistical Learning
-  -Hyperparameter Search: Grid search to determine regularization strength.
+  - Hyperparameter Search: Grid search to determine regularization strength.
     
 - Deep Learning
   -Cross-entropy loss
