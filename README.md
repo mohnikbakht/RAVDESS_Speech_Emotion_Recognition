@@ -18,8 +18,8 @@ We split our data samples into three sets: train, validation, and test. To preve
 For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
 
 
-<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="700"/>
-<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig6.svg" width="700"/>
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="900"/>
+<img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig5.svg" width="900"/>
 
 
 ## Feature Selection
