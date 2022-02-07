@@ -64,6 +64,7 @@ Evaluation results for each model are listed in the table below:
 <p align="center">
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.PNG" width="900"/>
 </p>
+
 ### Reports:
 - final paper 
 - presentation slides
