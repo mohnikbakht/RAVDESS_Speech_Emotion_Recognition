@@ -17,23 +17,25 @@ Humans can sense emotions from only sounds. If we convert the raw audio signals 
 
 For local features, we divide audio signals into short time windows of length 50 ms with 50\% overlap and compute Mel frequency cepstral coefficients (MFCCs), Mel-spectrogram, chromagram, and spectral contrast. By computing these features, we convert our raw audio signals into a perceptually meaningful space, representing the data in a way that's closer to how humans perceive the audio signals. Doing so has been shown to improve audio classifcation accuracy for SER. For global features, we compute mean, standard deviation, max, min, and range of each raw audio signal. 
 
+<p align="center">
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/2D%20features.svg" width="900"/>
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig5.svg" width="900"/>
+</p>
 
 ## Feature Selection
 
 We approach feature selection by implementing the backwards selection algorithm shown below. We use the validation accuracy as the evaluation score throughout this procedure. The results of our selection algorithm for all models are shown in Table below.
-
+<p align="center">
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward.PNG" width="900"/>
 
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/backward_alg.PNG" width="700"/>
-
+</p>
 ## Models & Pipeline
 
 There are two classes of algorithms that we investigate: 1) traditional statistical learning methods and 2) deep learning methods. First, we develop linear discriminative models such as logistic regression and support vector machines to establish the baseline performance of the SER classification task. These methods have been shown to be reasonably effective at audio sample classification tasks. Furthermore, we can use the test results to determine if our task is linearly separable given our extracted features, or if more complex models are required. Second, we develop three neural network architectures: 1) multi-layer perceptron (MLP), 2) 1D convolutional (CNN), and 3) 2D convolutional networks (CNN). In recent works, neural networks have been shown to achieve state-of-the-art performance in audio classification tasks. We use Scikit-Learn implementations of LR and SVM, and Pytorch to build all deep learning models. 
-  
+<p align="center">
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/Fig1.svg" width="900"/>
-
+</p>
 ## Training Parameters
 
 - Statistical Learning
@@ -59,9 +61,9 @@ There are two classes of algorithms that we investigate: 1) traditional statisti
 ## Results
 
 Evaluation results for each model are listed in the table below:
-
+<p align="center">
 <img src="https://github.com/mohnikbakht/RAVDESS_Speech_Emotion_Recognition/blob/main/figs/results.PNG" width="900"/>
-
+</p>
 ### Reports:
 - final paper 
 - presentation slides
